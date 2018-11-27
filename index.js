@@ -1,26 +1,26 @@
-;(function(root, factory) { // eslint-disable-line no-extra-semi
+; (function (root, factory) { // eslint-disable-line no-extra-semi
   var deepDiff = factory(root);
   // eslint-disable-next-line no-undef
   if (typeof define === 'function' && define.amd) {
-      // AMD
-      define('DeepDiff', function() { // eslint-disable-line no-undef
-          return deepDiff;
-      });
+    // AMD
+    define('DeepDiff', function () { // eslint-disable-line no-undef
+      return deepDiff;
+    });
   } else if (typeof exports === 'object' || typeof navigator === 'object' && navigator.product.match(/ReactNative/i)) {
-      // Node.js or ReactNative
-      module.exports = deepDiff;
+    // Node.js or ReactNative
+    module.exports = deepDiff;
   } else {
-      // Browser globals
-      var _deepdiff = root.DeepDiff;
-      deepDiff.noConflict = function() {
-          if (root.DeepDiff === deepDiff) {
-              root.DeepDiff = _deepdiff;
-          }
-          return deepDiff;
-      };
-      root.DeepDiff = deepDiff;
+    // Browser globals
+    var _deepdiff = root.DeepDiff;
+    deepDiff.noConflict = function () {
+      if (root.DeepDiff === deepDiff) {
+        root.DeepDiff = _deepdiff;
+      }
+      return deepDiff;
+    };
+    root.DeepDiff = deepDiff;
   }
-}(this, function(root) {
+}(this, function (root) {
   var validKinds = ['N', 'E', 'A', 'D'];
 
   // nodejs compatible on server side and in the browser.
@@ -93,10 +93,8 @@
   }
   inherits(DiffArray, Diff);
 
-  function arrayRemove(arr, from, to) {
-    var rest = arr.slice((to || from) + 1 || arr.length);
-    arr.length = from < 0 ? arr.length + from : from;
-    arr.push.apply(arr, rest);
+  function arrayRemove(arr, idx) {
+    arr.splice(idx, 1);
     return arr;
   }
 
